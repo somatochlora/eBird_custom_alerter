@@ -1,0 +1,16 @@
+{
+    "locations":[
+        {
+            "name":"The Bluff",
+            "id":"L7647094",
+            "users":"ANY",
+            "minSpecies":0
+        },
+        {
+            "name":"Rondeau Picnic Area",
+            "id":"L1202544",
+            "users":"ANY",
+            "minSpecies":0
+        }
+    ]
+}
