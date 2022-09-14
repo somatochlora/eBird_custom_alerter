@@ -31,7 +31,7 @@ for (let location of locations) {
 
         if (lastResults.hasOwnProperty(location.id)) {
             results = results.filter(checklist => {
-                lastResults[location.id].checklists.indexOf(checklist.subId);
+                lastResults[location.id].checklists.indexOf(checklist.subId) == -1;
             });
         }
 
@@ -57,7 +57,6 @@ Promise.all(promisesArray).then(() => {
         console.log(output);
     });
     fs.writeFileSync('savedResults.json', JSON.stringify(savedChecklists, null, 2));
-
 });
 
 
