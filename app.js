@@ -31,7 +31,7 @@ for (let location of locations) {
 
         if (lastResults.hasOwnProperty(location.id)) {
             results = results.filter(checklist => {
-                lastResults[location.id].checklists.indexOf(checklist.subId) == -1;
+                return lastResults[location.id].checklists.indexOf(checklist.subId) == -1
             });
         }
 
