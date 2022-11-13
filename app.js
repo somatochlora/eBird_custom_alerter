@@ -53,7 +53,9 @@ Promise.all(promisesArray).then(() => {
             " species observed, " +
             checklist.obsDt +
             " " +
-            checklist.obsTime;
+            checklist.obsTime +
+            " https://ebird.org/checklist/" +
+            checklist.subId;
         console.log(output);
     });
     fs.writeFileSync('savedResults.json', JSON.stringify(savedChecklists, null, 2));
