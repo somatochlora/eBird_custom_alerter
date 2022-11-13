@@ -2,6 +2,7 @@ const dotenv = require('dotenv').config();
 const fs = require('fs');
 
 const eBirdKey = process.env.EBIRD_API_KEY;
+const ntfyURL = process.env.NTFY_URL;
 
 async function fetchEbirdResults (location) {
     let results = await fetch("https://api.ebird.org/v2/product/lists/" + location + "?key=" + eBirdKey + "&maxResults=200");
@@ -42,22 +43,35 @@ for (let location of locations) {
 }
 
 Promise.all(promisesArray).then(() => {
-    toEmail.forEach(checklist => {
-        let output = 
-            "Location: " +
-            checklist.loc.name +        
-            " Observer: " +
-            checklist.userDisplayName +
-            ", " +
-            checklist.numSpecies +
-            " species observed, " +
-            checklist.obsDt +
-            " " +
-            checklist.obsTime +
-            " https://ebird.org/checklist/" +
-            checklist.subId;
-        console.log(output);
-    });
+    if (toEmail.length > 0) {
+        console.log("new results found");
+        let allOutput = ""
+        toEmail.forEach(checklist => {
+            let output = 
+                "Location: " +
+                checklist.loc.name +        
+                " Observer: " +
+                checklist.userDisplayName +
+                ", " +
+                checklist.numSpecies +
+                " species observed, " +
+                checklist.obsDt +
+                " " +
+                checklist.obsTime +
+                " https://ebird.org/checklist/" +
+                checklist.subId;
+            console.log(output);
+            allOutput += output + "\n";
+        });
+        fetch(
+            ntfyURL,
+            {
+                method: 'POST',
+                body: allOutput
+            }
+        );
+    }
+    
     fs.writeFileSync('savedResults.json', JSON.stringify(savedChecklists, null, 2));
 });
 
