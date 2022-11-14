@@ -70,14 +70,6 @@ Promise.all(promisesArray).then(() => {
                 body: allOutput
             }
         );
-    } else {
-        fetch(
-            ntfyURL,
-            {
-                method: 'POST',
-                body: 'no results found'
-            }
-        );
     }
     
     fs.writeFileSync('savedResults.json', JSON.stringify(savedChecklists, null, 2));
