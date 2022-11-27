@@ -36,6 +36,10 @@ for (let location of locations) {
             });
         }
 
+        if (location.hasOwnProperty("min_species")) {
+            results = results.filter(checklist => checklist.numSpecies >= location.min_species);
+        }
+
         results.forEach(checklist => {
             toEmail.push(checklist);
         });
