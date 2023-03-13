@@ -30,6 +30,10 @@ for (let location of locations) {
            curLocationToSave.checklists.push(checklist.subId); 
         });
 
+        // shorten results list to avoid unstable behaviour when multiple checklists have the same time at the end of the list
+        results.length = results.length - 5;
+        console.log(results[results.length - 1]);
+
         if (lastResults.hasOwnProperty(location.id)) {
             results = results.filter(checklist => {
                 return lastResults[location.id].checklists.indexOf(checklist.subId) == -1
