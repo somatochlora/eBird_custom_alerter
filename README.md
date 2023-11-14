@@ -1,4 +1,4 @@
-###### eBird custom alerter
+# eBird custom alerter
 
 A nodeJS tool to generate custom alerts to your phone from eBird using [ntfy](https://ntfy.sh).
 
